@@ -14,11 +14,9 @@ export const Auth = ({type} : {type: 'signup' | 'signin'}) => {
 
     async function sendRequest() {
         try {
-            const responce = await axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, {
-                postInputs
-            });
+            const responce = await axios.post(`${BACKEND_URL}/api/v1/user/${type === 'signin'?'signin':'signup'}`,postInputs)
             const jwt = responce.data;
-            localStorage.setItem("token", "Bearer " + jwt);
+            localStorage.setItem("token", jwt);
             navigate("/blogs")
         } catch(e){
             alert("Wrong creds");
